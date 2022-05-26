@@ -1,1 +1,38 @@
-<p>Hello!</p>
+<div class="container">
+  <p class="title">Sugar</p>
+
+  <div class="selects">
+    <p class="select" *ngIf="select.length == 0" style="text-align: center;">[ничего не выбрано]</p>
+    <div *ngIf="select.length != 0">
+      <span class="select">[</span>
+      <span class="select" *ngFor="let el of select" (click)="deleteEl(el)">{{ el.name }}({{ el.value }}), </span>
+      <span class="select">]</span>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button (click)="viewBreakfast()" style="background-color: #A5D6A7;" [ngClass]="{'active' : view.breakfast}" class="btn">Завтрак</button>
+    <button (click)="viewLunch()" style="background-color: #E6EE9C;" [ngClass]="{'active' : view.lunch}" class="btn">Обед</button>
+    <button (click)="viewDinner()" style="background-color: #FFCC80;" [ngClass]="{'active' : view.dinner}" class="btn">Ужин</button>
+  </div>
+  
+  <div class="body">
+    <div *ngIf="view.breakfast">
+      <p class="item" *ngFor="let el of breakfast" (click)="addEl(el)">{{ el.name }}({{ el.value }})</p>
+    </div>
+    <div *ngIf="view.lunch">
+      <p class="item" *ngFor="let el of lunch" (click)="addEl(el)">{{ el.name }}({{ el.value }})</p>
+    </div>
+    <div *ngIf="view.dinner">
+      <p class="item" *ngFor="let el of dinner" (click)="addEl(el)">{{ el.name }}({{ el.value }})</p>
+    </div>
+  </div>
+
+  <button class="btn__clean" (click)="clean()">Очистить</button>
+  <button class="btn__calc" (click)="calc()">Посчитать</button>
+</div>
+
+<div class="popup" *ngIf="popup">
+  <p class="popup__title">{{ sum }}</p>
+  <button class="popup__btn" (click)="back()">Назад</button>
+</div>

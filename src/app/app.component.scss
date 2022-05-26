@@ -1,0 +1,87 @@
+.title {
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+}
+.selects {}
+.select {
+  font-size: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+.btn {
+  font-size: 40px;
+  width: 100%;
+  margin: 10px 5px;
+  border: 2px solid #263238;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #263238;
+  cursor: pointer;
+}
+.active {
+  border: 2px solid #ECEFF1;
+}
+.item {
+  font-size: 30px;
+  margin: 0 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.btn__clean {
+  position: absolute;
+  bottom: 65px;
+  background: #ccc;
+  font-size: 40px;
+  width: 100%;
+  border: 2px solid #263238;
+  border-radius: 5px;
+  color: #263238;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn__calc {
+  position: absolute;
+  bottom: 5px;
+  background: #4CAF50;
+  font-size: 40px;
+  width: 100%;
+  border: 2px solid #263238;
+  border-radius: 5px;
+  color: #263238;
+  font-weight: bold;
+  cursor: pointer;
+}
+.popup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup__title {
+  font-size: 120px;
+  user-select: none;
+}
+.popup__btn {
+  position: absolute;
+  bottom: 5px;
+  background: #ccc;
+  font-size: 40px;
+  width: 100%;
+  border: 2px solid #263238;
+  border-radius: 5px;
+  color: #263238;
+  font-weight: bold;
+  cursor: pointer;
+}
