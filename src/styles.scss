@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+* {
+  font-family: 'Amatic SC', cursive;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #263238;
+}
+p,span {
+  color: #ECEFF1;
+}
