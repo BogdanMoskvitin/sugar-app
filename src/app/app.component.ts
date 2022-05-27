@@ -1,38 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { Food } from './food.model';
+import { mockFood } from './food.mock';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  breakfast = [{ id: 1, name: 'Бутерброд', value: 2 }, { id: 2, name: 'Какао', value: 1 },]
-  lunch = [{ id: 3, name: 'Хлеб', value: 2 }, { id: 4, name: 'Суп', value: 0 },]
-  dinner = [{ id: 5, name: 'Булочка', value: 2 }, { id: 6, name: 'Чай', value: 1 },]
+  myControl = new FormControl();
+  filteredOptions: Observable<Food[]>;
 
-  view = {
-    breakfast: false,
-    lunch: false,
-    dinner: false,
+  options: Food[] = mockFood;
+
+  select = [];
+  sum = 0;
+  popup = false;
+
+  ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.name)),
+      map(name => (name ? this._filter(name) : this.options.slice())),
+    );
   }
 
-  select = []
-  sum = 0
-  popup = false
+  displayFn(food: Food): string {
+    return food && food.name ? food.name : '';
+  }
 
-  viewBreakfast() {
-    this.view = {breakfast: true, lunch: false, dinner: false}
-  }
-  viewLunch() {
-    this.view = {breakfast: false, lunch: true, dinner: false}
-  }
-  viewDinner() {
-    this.view = {breakfast: false, lunch: false, dinner: true}
+  private _filter(name: string): Food[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   addEl(el) {
     this.select.push(el)
+    this.myControl.setValue('')
   }
 
   deleteEl(el) {

@@ -4,34 +4,25 @@
   text-align: center;
   user-select: none;
 }
-.selects {}
 .select {
   font-size: 30px;
   margin: 0 5px;
   cursor: pointer;
 }
-.btns {
+.form {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-top: 10px;
 }
-.btn {
-  font-size: 40px;
-  width: 100%;
-  margin: 10px 5px;
-  border: 2px solid #263238;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #263238;
-  cursor: pointer;
+input {
+  color: #ECEFF1;
+  font-size: 20px;
 }
-.active {
-  border: 2px solid #ECEFF1;
+.unit {
+  color: #4CAF50;
 }
-.item {
-  font-size: 30px;
-  margin: 0 5px;
-  text-align: center;
-  cursor: pointer;
+.amount {
+  color: #FFCC80;
 }
 .btn__clean {
   position: absolute;
