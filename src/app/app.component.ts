@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   breakfast = [{ id: 1, name: 'Бутерброд', value: 2 }, { id: 2, name: 'Какао', value: 1 },]
   lunch = [{ id: 3, name: 'Хлеб', value: 2 }, { id: 4, name: 'Суп', value: 0 },]
   dinner = [{ id: 5, name: 'Булочка', value: 2 }, { id: 6, name: 'Чай', value: 1 },]
@@ -17,33 +18,17 @@ export class AppComponent {
   }
 
   select = []
-
   sum = 0
-
   popup = false
 
   viewBreakfast() {
-    this.view = {
-      breakfast: true,
-      lunch: false,
-      dinner: false,
-    }
+    this.view = {breakfast: true, lunch: false, dinner: false}
   }
-
   viewLunch() {
-    this.view = {
-      breakfast: false,
-      lunch: true,
-      dinner: false,
-    }
+    this.view = {breakfast: false, lunch: true, dinner: false}
   }
-
   viewDinner() {
-    this.view = {
-      breakfast: false,
-      lunch: false,
-      dinner: true,
-    }
+    this.view = {breakfast: false, lunch: false, dinner: true}
   }
 
   addEl(el) {
@@ -51,12 +36,13 @@ export class AppComponent {
   }
 
   deleteEl(el) {
-    this.select.forEach(res => {
-      if(res.id == el.id){
-        let index = this.select.indexOf(res)
+    for(let i = 0; i < this.select.length; i++) {
+      if(this.select[i].id == el.id) {
+        let index = this.select.indexOf(this.select[i])
         this.select.splice(index, 1)
+        break
       }
-    })
+    }
   }
 
   calc() {
@@ -68,6 +54,7 @@ export class AppComponent {
 
   back() {
     this.popup = false
+    this.sum = 0;
   }
 
   clean() {
