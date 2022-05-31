@@ -11,8 +11,9 @@
 }
 .form {
   display: flex;
-  justify-content: center;
   margin-top: 10px;
+  flex-direction: column;
+  align-items: center;
 }
 input {
   color: #ECEFF1;
@@ -61,8 +62,12 @@ input {
   align-items: center;
 }
 .popup__title {
-  font-size: 120px;
+  font-size: 100px;
   user-select: none;
+  span {
+    font-size: 80px;
+    color: #FFCC80;
+  }
 }
 .popup__btn {
   position: absolute;

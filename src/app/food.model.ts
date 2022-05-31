@@ -3,5 +3,7 @@ export interface Food {
   unit: string;
   name: string;
   amount: string;
-  value: number
+  value: number;
+  min: number;
+  question;
 }

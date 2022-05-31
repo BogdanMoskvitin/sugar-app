@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Food } from './food.model';
 import { mockFood } from './food.mock';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,14 @@ export class AppComponent implements OnInit {
 
   select = [];
   sum = 0;
+  round = 0;
   popup = false;
+  question: string;
+  el: Food;
+
+  myForm : FormGroup = new FormGroup({
+    "count": new FormControl("", [Validators.required, Validators.pattern("^[0-9]*$")]),
+  })
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -40,8 +48,18 @@ export class AppComponent implements OnInit {
   }
 
   addEl(el) {
-    this.select.push(el)
+    this.el = el
+    this.question = 'Сколько ' + el.question + ' ты съела?'
+  }
+
+  submit() {
+    let arr = {
+      el: this.el,
+      count: this.myForm.value.count,
+    }
+    this.select.push(arr)
     this.myControl.setValue('')
+    this.myForm.reset()
   }
 
   deleteEl(el) {
@@ -56,8 +74,10 @@ export class AppComponent implements OnInit {
 
   calc() {
     this.select.forEach(res => {
-      this.sum += res.value
+      this.sum += (res.count * res.el.min)
     })
+    this.round = Math.round(this.sum)
+    this.sum = +this.sum.toFixed(3)
     this.popup = true
   }
 

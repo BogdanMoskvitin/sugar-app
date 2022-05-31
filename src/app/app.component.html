@@ -5,30 +5,38 @@
     <p class="select" *ngIf="select.length == 0" style="text-align: center;">[ничего не выбрано]</p>
     <div *ngIf="select.length != 0">
       <span class="select">[</span>
-      <span class="select" *ngFor="let el of select" (click)="deleteEl(el)">{{ el.name }}, </span>
+      <span class="select" *ngFor="let el of select" (click)="deleteEl(el)">{{ el.el.name }}({{ el.count }}), </span>
       <span class="select">]</span>
     </div>
   </div>
 
-  <div class="form">
-    <form class="example-form">
-      <mat-form-field class="example-full-width" appearance="fill" style="width: 300px;">
-        <mat-label style="font-size: 20px;">Введите название продукта</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option style="font-size: 20px;" *ngFor="let option of filteredOptions | async" [value]="option" (click)="addEl(option)">
-            <span class="unit">{{option.unit}}</span> {{option.name}} (<span class="amount">{{option.amount}}</span>)
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-  </div>
+  <form class="example-form form" [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <mat-form-field class="example-full-width" appearance="fill" style="width: 300px;">
+      <mat-label style="font-size: 20px;">Введите название продукта</mat-label>
+      <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option style="font-size: 20px;" *ngFor="let option of filteredOptions | async" [value]="option" (click)="addEl(option)">
+          <span class="unit">{{option.unit}}</span> {{option.name}} (<span class="amount">{{option.amount}}</span>)
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field" appearance="fill" style="width: 300px;">
+      <mat-label style="font-size: 20px;">{{question}}</mat-label>
+      <input style="font-size: 20px;" matInput type="text" formControlName="count">
+      <div *ngIf="myForm.controls['count'].invalid && myForm.controls['count'].touched" style="color: red">
+        Введите цифру!
+      </div>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" style="width: 300px;" [disabled]="myForm.invalid">Добавить в список</button>
+  </form>
 
   <button class="btn__clean" (click)="clean()">Очистить</button>
   <button class="btn__calc" (click)="calc()">Посчитать</button>
 </div>
 
 <div class="popup" *ngIf="popup">
-  <p class="popup__title">{{ sum }}</p>
+  <p class="popup__title">~{{ round }} <span>({{ sum }})</span></p>
   <button class="popup__btn" (click)="back()">Назад</button>
 </div>
