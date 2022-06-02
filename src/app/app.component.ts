@@ -90,9 +90,9 @@ export class AppComponent implements OnInit {
 
   sendSugarForm() {
     if(this.sugarForm.value.sugar > 7) {
-      this.needSugar = this.sugarForm.value.sugar - 7;
+      this.needSugar = 1;
     } else if (this.sugarForm.value.sugar < 7) {
-      this.needSugar = -(7 - this.sugarForm.value.sugar)
+      this.needSugar = -1
     } else {
       this.needSugar = 0
     }
